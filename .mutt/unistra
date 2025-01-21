@@ -1,0 +1,30 @@
+source ~/.muttrc
+
+source "gpg -d ~/.mutt/pwd.gpg |"
+
+
+## Reusable variables.
+set my_user         = "elio.ouedraogo@etu.unistra.fr"
+set my_server = "partage.unistra.fr"
+
+## IMAP configuration.
+
+set from  = "$my_user"
+set folder = "imaps://partage.unistra.fr:993"
+set imap_user       = $my_user
+set imap_pass       = $my_unistra_password
+set spoolfile       = +INBOX
+
+set ssl_force_tls = yes
+set ssl_starttls = yes
+
+set imap_check_subscribed
+set header_cache = ~/.cache/mutt/unistra
+unset imap_passive
+set mail_check = 60
+set timeout = 15
+
+
+
+## Send options
+set sendmail="/usr/bin/msmtp -a unistra"

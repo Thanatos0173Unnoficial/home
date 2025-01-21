@@ -1,0 +1,11 @@
+source ~/.muttrc
+source "gpg -d ~/.mutt/pwd.gpg |"
+## Receive options
+set imap_user = "elio.oued@gmail.com"
+set imap_pass = $my_perso_password
+set folder = imaps://elio.oued@imap.gmail.com
+set spoolfile = +INBOX
+set postponed = +[Gmail]/Drafts
+
+## Send options
+set sendmail="/usr/bin/msmtp -a gmail"
