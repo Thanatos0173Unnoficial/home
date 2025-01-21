@@ -194,12 +194,12 @@
 (server-start)
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 
-(defun mutt-launcher (file)
+(defun mutt-launcher ()
   (interactive)
-  (read-answer "Foo "
-     '(("yes"  ?y "perform the action")
-       ("no"   ?n "skip to the next")
-       ("all"  ?! "perform for the rest without more questions")
+  (read-answer "Select mailbox "
+     '(("perso" (ansi-term "/usr/bin/mutt -F ~/.mutt/perso") "elio.oued@gmail.com")
+       ("work" (ansi-term "/usr/bin/mutt -F ~/.mutt/work") "elio.oued.word@gmail.com")
+       ("unistra" (ansi-term "/usr/bin/mutt -F ~/mutt/unistra") "elio.ouedraogo@etu.unistra.fr")
        ("help" ?h "show help")
        ("quit" ?q "exit"))))
 
