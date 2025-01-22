@@ -1,0 +1,11 @@
+## General Options
+set imap_check_subscribed
+set header_cache = ~/.cache/mutt
+unset imap_passive
+set imap_keepalive = 300
+set editor = emacsclient
+set pager = emacsclient
+set mail_check=300
+
+bind generic 0 first-entry
+bind generic,index $ last-entry

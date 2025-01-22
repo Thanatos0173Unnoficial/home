@@ -1,0 +1,36 @@
+#alias lock="i3lock --color '000000ff' --ignore-empty-password --indicator --pass-volume-keys --insidever-color '20200080' --insidewrong-color '20000080' --inside-color '00000080' --ringver-color '00ff00FF' --ringwrong-color 'FF0000FF' --ring-color 'FFFFFFFF' --line-color '00000000' --keyhl-color '00FF00FF' --bshl-color 'F00000FF' --separator-color '00000000' --time-color 'FFFFFFFF' --time-str '%H:%M:%S' --date-color 'FFFFFFFF' --date-str '%Y-%m-%d' --greeter-color 'FFFFFFFF' --verif-color 'FFFFFFFF' --wrong-color 'FFFFFFFF' --greeter-text '' --verif-text '' --wrong-text '' --noinput-text '' --radius 100 --ring-width '5' --clock --force-clock --no-verify"
+# DO NOT EDIT THE FIRST LINE! VERY IMPORTANT!
+
+
+
+alias clear_orphan="sudo pacman -Rs $(pacman -Qqtd)"
+
+alias nuget= "mono /usr/local/bin/nuget.exe"
+
+#alias venv_pip="~/bin/python3.13/bin/pip"
+#alias venv_python="~/bin/python3.13/bin/python"
+
+alias help="cat ~/.zprofile"
+
+function stopwatch() {
+    start=$(date +%s)
+    while true; do
+        time="$(( $(date +%s) - $start))"
+        printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
+        sleep 0.1
+    done
+}
+
+function off(){
+  FILE=/var/lib/pacman/db.lck
+  if [ -f "$FILE" ]; then
+    echo "File /var/lib/pacman/db.lck exists."
+    echo "You might want to wait until pacman have finished what it is doing"
+  else
+    poweroff
+  fi
+}
+
+# For Bash
+
+alias batt="upower -i /org/freedesktop/UPower/devices/battery_BAT0"

@@ -7,7 +7,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(ccls org-preview-html org-modern clang-format powerline-evil dap-mode company flycheck lsp-mode which-key s powerline evil dash badwolf-theme)))
+   '(yasnippet-snippets company-jedi lsp-python-ms elpy python-mode csv-mode ccls org-preview-html org-modern clang-format powerline-evil dap-mode company flycheck lsp-mode which-key s powerline evil dash badwolf-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -22,7 +22,9 @@
 (load "general.el")
 
 ;; ============================== YASNIPPETS ==============================
-
+(require 'yasnippet)
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
 (setq yas-snippet-dirs
       '(
 	"~/.emacs.d/snippets"
@@ -114,6 +116,9 @@
 		     ")"
  )))))
 
+(electric-pair-mode 1)
+(add-hook 'c-common-mode 'lsp)
+
 
 ;; ============================== FUNCTIONS ==============================
 
@@ -169,11 +174,18 @@
   "i" #'import-from-header
 )
 
+
 ;; ============================== LSP ==============================
 
 (require 'lsp-mode)
-(add-hook 'c-mode-hook 'lsp)
+(use-package lsp-pyright
+  :ensure t
+  :custom (lsp-pyright-langserver-command "pyright") ;; or basedpyright
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred
 
+(setq lsp-pyright-python-executable-cmd "/home/thanatos/bin/python3.13/bin/python")
 ;; ------------------------------ CCLS ------------------------------
 
 (require 'ccls)
@@ -196,14 +208,38 @@
 
 (defun mutt-launcher ()
   (interactive)
-  (read-answer "Select mailbox "
-     '(("perso" (ansi-term "/usr/bin/mutt -F ~/.mutt/perso") "elio.oued@gmail.com")
-       ("work" (ansi-term "/usr/bin/mutt -F ~/.mutt/work") "elio.oued.word@gmail.com")
-       ("unistra" (ansi-term "/usr/bin/mutt -F ~/mutt/unistra") "elio.ouedraogo@etu.unistra.fr")
-       ("help" ?h "show help")
-       ("quit" ?q "exit"))))
+  (let ((xlist '("Perso" "Work" "Unistra"))) 
+  (ansi-term (format "/usr/bin/mutt -F ~/.mutt/%s" (downcase (completing-read "Which mail:" xlist nil t))) 
+   )))
 
       
+(defun +lsp/uninstall-server (dir)
+  "Delete a LSP server from `lsp-server-install-dir'."
+  (interactive
+   (list (read-directory-name "Uninstall LSP server: " lsp-server-install-dir nil t)))
+  (unless (file-directory-p dir)
+    (user-error "Couldn't find %S directory" dir))
+  (delete-directory dir 'recursive)
+  (message "Uninstalled %S" (file-name-nondirectory dir)))
  
+(require 'color)
+
+(defun csv-highlight (&optional separator)
+  (interactive (list (when current-prefix-arg (read-char "Separator: "))))
+  (font-lock-mode 1)
+  (let* ((separator (or separator ?\,))
+         (n (count-matches (string separator) (pos-bol) (pos-eol)))
+         (colors (cl-loop for i from 0 to 1.0 by (/ 2.0 n)
+                          collect (apply #'color-rgb-to-hex 
+                                         (color-hsl-to-rgb i 0.3 0.5)))))
+    (cl-loop for i from 2 to n by 2 
+             for c in colors
+             for r = (format "^\\([^%c\n]+%c\\)\\{%d\\}" separator separator i)
+             do (font-lock-add-keywords nil `((,r (1 '(face (:foreground ,c)))))))))
+
+
+(add-hook 'csv-mode-hook 'csv-highlight)
+(add-hook 'csv-mode-hook 'csv-align-mode)
+(add-hook 'csv-mode-hook '(lambda () (interactive) (toggle-truncate-lines nil)))
 
 (provide '.emacs)
