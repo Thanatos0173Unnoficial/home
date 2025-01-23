@@ -21,3 +21,5 @@ SCHEDULED: <2025-01-25>
 **** TODO [#7] Modélisation en 3D
 ** PC
 **** DONE Installer Windows
+** Emacs (LAPTOP)
+**** TODO [#1] Installer clang-format+

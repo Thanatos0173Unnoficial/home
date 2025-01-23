@@ -7,7 +7,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(2048-game impatient-mode yasnippet-snippets company-jedi lsp-python-ms elpy python-mode csv-mode ccls org-preview-html org-modern clang-format powerline-evil dap-mode company flycheck lsp-mode which-key s powerline evil dash badwolf-theme)))
+   '(yasnippet-snippets yasnippet-classic-snippets clang-format powerline-evil dap-mode company flycheck lsp-mode which-key s powerline evil dash badwolf-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -49,7 +49,8 @@
 
 ;; clang-format
 (require 'clang-format)
-(setq clang-format-style "~/.clang-format")
+(setq clang-format-style "file")
+(setq clang-format+-context 'modification)
 
 ;; Don't show startup message
 (setq inhibit-startup-message t)
