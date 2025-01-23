@@ -242,4 +242,7 @@
 (add-hook 'csv-mode-hook 'csv-align-mode)
 (add-hook 'csv-mode-hook '(lambda () (interactive) (toggle-truncate-lines nil)))
 
+(setq-default major-mode 'shell-script-mode)
+
 (provide '.emacs)
+

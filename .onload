@@ -34,3 +34,31 @@ function off(){
 # For Bash
 
 alias batt="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+
+mutt() {
+  # Define the list of options
+  local options=("Perso" "Work" "Unistra")
+  
+  while true; do
+    # Prompt the user to select an option
+    echo "Which mail (type 'q' to quit):"
+    select choice in "${options[@]}"; do
+      if [[ $REPLY == "q" ]]; then
+        echo "Quitting..."
+        return 0
+      elif [[ -n $choice ]]; then
+        # Convert the choice to lowercase
+        choice_lower=$(echo "$choice" | tr '[:upper:]' '[:lower:]')
+        
+        # Launch mutt with the corresponding configuration
+        /usr/bin/mutt -F ~/.mutt/"$choice_lower"
+        return 0
+      else
+        echo "Invalid choice, please try again."
+        break
+      fi
+    done
+  done
+}
+
+
