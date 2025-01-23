@@ -1,0 +1,23 @@
+#+TITLE: Things to do
+#+AUTHOR: Elio OUEDRAOGO
+#+SEQ_TODO: TODO | DONE
+#+CATEGORY: Main
+#+PRIORITIES: 1 10 5
+* Cours
+** Maths
+**** TODO [#2] Réviser optimisation
+SCHEDULED: <2025-01-12 Sat>
+** Administratif
+**** TOOD [#1] Faire une liste d'au moins 10 jobs possible
+SCHEDULED: <2025-01-23>
+
+* Colloc
+** Argent
+*** TODO [#2] Mettre courses de mercredi soir
+SCHEDULED: <2025-01-25>
+* Loisir
+** Ventilateur pour ampli
+**** TODO [#7] Chercher composants pour Papa
+**** TODO [#7] Modélisation en 3D
+** PC
+**** DONE Installer Windows
