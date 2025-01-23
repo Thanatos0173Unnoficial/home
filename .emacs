@@ -7,7 +7,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(yasnippet-snippets company-jedi lsp-python-ms elpy python-mode csv-mode ccls org-preview-html org-modern clang-format powerline-evil dap-mode company flycheck lsp-mode which-key s powerline evil dash badwolf-theme)))
+   '(2048-game impatient-mode yasnippet-snippets company-jedi lsp-python-ms elpy python-mode csv-mode ccls org-preview-html org-modern clang-format powerline-evil dap-mode company flycheck lsp-mode which-key s powerline evil dash badwolf-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -42,6 +42,10 @@
 
 
 ;; ============================== COSMETICS ==============================
+
+(setq-default truncate-lines nil)
+
+(require 'whitespace)
 
 ;; clang-format
 (require 'clang-format)
@@ -117,7 +121,7 @@
  )))))
 
 (electric-pair-mode 1)
-(add-hook 'c-common-mode 'lsp)
+(add-hook 'c-mode 'lsp)
 
 
 ;; ============================== FUNCTIONS ==============================
@@ -172,6 +176,10 @@
   "c" #'config-file-opener
   "R" #'config-file-reload 
   "i" #'import-from-header
+  "f" 'clang-format-buffer
+  "p" 'flycheck-previous-error
+  "n" 'flycheck-next-error
+  "l" 'goto-line
 )
 
 
@@ -193,7 +201,7 @@
 
 ;; ============================== ORG ==============================
 
-(setq org-agenda-files '("/home/thanatos/Sync/todo.org"))
+(setq org-agenda-files '("/home/thanatos/todo.org"))
 (setq org-agenda-prefix-format '((agenda . "- %c : %b")))
 (setq org-agenda-prefix-format '((todo . "- %c : %b")))
 
@@ -243,6 +251,12 @@
 (add-hook 'csv-mode-hook '(lambda () (interactive) (toggle-truncate-lines nil)))
 
 (setq-default major-mode 'shell-script-mode)
+
+
+  (defun markdown-html (buffer)
+    (princ (with-current-buffer buffer
+      (format "<!DOCTYPE html><html><title>Impatient Markdown</title><xmp theme=\"united\" style=\"display:none;\"> %s  </xmp><script src=\"http://ndossougbe.github.io/strapdown/dist/strapdown.js\"></script></html>" (buffer-substring-no-properties (point-min) (point-max))))
+    (current-buffer)))
 
 (provide '.emacs)
 
