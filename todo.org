@@ -8,17 +8,22 @@
 **** TODO [#2] Réviser optimisation
 SCHEDULED: <2025-01-12 Sat>
 ** Administratif
-**** TOOD [#1] Faire une liste d'au moins 10 jobs possible
+**** DONE [#1] Faire une liste d'au moins 10 jobs possible
 SCHEDULED: <2025-01-23>
+**** DONE Mail CHORUS
+**** TODO Mail Fablab Lannion
+**** DONE Mail Scolarité
+**** TODO Lettre de Motivation OVH
+**** TODO Lettre de Motivation Manpower
 
 * Colloc
 ** Argent
-*** TODO [#2] Mettre courses de mercredi soir
+*** DONE [#2] Mettre courses de mercredi soir
 SCHEDULED: <2025-01-25>
 * Loisir
 ** Ventilateur pour ampli
-**** TODO [#7] Chercher composants pour Papa
-**** TODO [#7] Modélisation en 3D
+**** DONE [#7] Chercher composants pour Papa
+**** DONE [#7] Modélisation en 3D
 ** PC
 **** DONE Installer Windows
 ** Emacs (LAPTOP)
