@@ -1,0 +1,13 @@
+---
+title: Title
+author: Crow
+rights: MIT License
+lang: fr-FR
+mainlang: french
+tags: [pandoc, book]
+mainfont: DejaVu Sans
+# Filter preferences:
+# - pandoc-crossref
+linkReferences: true
+---
+
